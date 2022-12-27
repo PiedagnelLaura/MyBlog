@@ -1,1 +1,26 @@
-﻿<h1>Liste des articles</h1>
+﻿@model ArticlesViewModel
+
+<h1>Liste des articles</h1>
+
+<table class="table">
+    @foreach(var article in Model.Articles)
+    {
+        if (article.Available)
+        {
+            <tr>
+                <td>@article.Id</td>
+                <td>@article.Title</td>
+                <td>@article.Content</td>
+            </tr>
+        }  
+        else
+        {
+            <tr class="bg-secondary text-light">
+                <td>@article.Id</td>
+                <td>@article.Title</td>
+                <td>@article.Content</td>
+
+            </tr>
+        }
+    }
+</table>
