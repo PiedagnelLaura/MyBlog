@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyBlog.Mocks;
 using MyBlog.Models;
+using MyBlog.ViewModels;
 
 namespace MyBlog.Controllers
 {
@@ -10,30 +12,7 @@ namespace MyBlog.Controllers
             // Créer une liste d'article EN DUR
             var vm = new ArticlesViewModel
             {
-                Articles = new List<ArticlesModel>
-                {
-                    new ArticlesModel
-                    {
-                        Id = 0,
-                        Title = "Les objets connectés en 2022",
-                        Content = "...",
-                        Available= true,
-                    } ,
-                    new ArticlesModel
-                    {
-                        Id = 1,
-                        Title = "Les objets connectés en 2023",
-                        Content = "...",
-                        Available= true,
-                    } ,
-                    new ArticlesModel
-                    {
-                        Id = 2,
-                        Title = "Les objets connectés en 2024",
-                        Content = "...",
-                        Available= false,
-                    } ,
-                }
+                Articles = ArticlesMock.listArticles
             };
 
             //Chercher les articles ou tu veux
