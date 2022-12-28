@@ -2,25 +2,17 @@
 
 <h1>Liste des articles</h1>
 
-<table class="table">
+<div class="allArticles">
     @foreach(var article in Model.Articles)
     {
         if (article.Available)
         {
-            <tr>
-                <td>@article.Id</td>
-                <td>@article.Title</td>
-                <td>@article.Content</td>
-            </tr>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@article.Title</h5>
+                    <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id" class="btn btn-primary">Lire plus</a>
+                </div>
+            </div>
         }  
-        else
-        {
-            <tr class="bg-secondary text-light">
-                <td>@article.Id</td>
-                <td>@article.Title</td>
-                <td>@article.Content</td>
-
-            </tr>
-        }
     }
-</table>
+</div>
