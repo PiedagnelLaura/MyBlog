@@ -1,24 +1,41 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyBlog.Mocks;
 using MyBlog.Models;
+using MyBlog.Repository.Context;
 using MyBlog.ViewModels;
 
 namespace MyBlog.Controllers
 {
     public class ArticlesController : Controller
     {
-        public IActionResult Index()
+        private readonly DbBlogContext _dbBlogContext;
+        public ArticlesController(DbBlogContext dbBlogContext)
         {
-            // Créer une liste d'article EN DUR
+            _dbBlogContext= dbBlogContext;
+        }
+        public async Task<IActionResult> Index()
+        {
+            
             var vm = new ArticlesViewModel
             {
-                Articles = ArticlesMock.listArticles
+                Articles = await _dbBlogContext.Articles.ToListAsync()
             };
 
-            //Chercher les articles ou tu veux
-            //Transforme en données pour ta vue (ici en viewModel)
-
             return View(vm);
+        }
+
+        /// <summary>
+        /// Get the data from the mock to put them in a database
+        /// </summary>
+        /// <returns>redirect to the article list</returns>
+        public async Task<IActionResult> AddDataFromMock() 
+        {
+            var lstArticlesMock = ArticlesMock.listArticles;
+            _dbBlogContext.Articles.AddRange(lstArticlesMock);
+            await _dbBlogContext.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
     }
 }
