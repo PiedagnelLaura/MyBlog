@@ -55,7 +55,7 @@ namespace MyBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,Available")] ArticlesModel articlesModel)
+        public async Task<IActionResult> Create([Bind("Id,Title,Content,Available")] ArticleModel articlesModel)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace MyBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,Available")] ArticlesModel articlesModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,Available")] ArticleModel articlesModel)
         {
             if (id != articlesModel.Id)
             {

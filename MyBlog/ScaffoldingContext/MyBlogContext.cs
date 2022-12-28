@@ -14,6 +14,6 @@ namespace MyBlog.Data
         {
         }
 
-        public DbSet<MyBlog.Models.ArticlesModel> Articles { get; set; } = default!;
+        public DbSet<MyBlog.Models.ArticleModel> Articles { get; set; } = default!;
     }
 }

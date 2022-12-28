@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MyBlog.Repository.Context;
 using Microsoft.Extensions.DependencyInjection;
 using MyBlog.Data;
+using MyBlog.Repository.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddControllersWithViews();
 //Add Entity Framework 
 builder.Services.AddDbContext<DbBlogContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("BlogDbContext")));
+
+builder.Services.AddTransient<ArticlesPublicDAL>();
 
 var mvcBuilder = builder.Services.AddRazorPages();
 builder.Services.AddDbContext<MyBlogContext>(options =>

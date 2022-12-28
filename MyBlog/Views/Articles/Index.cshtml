@@ -5,14 +5,13 @@
 <div class="allArticles">
     @foreach(var article in Model.Articles)
     {
-        if (article.Available)
-        {
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">@article.Title</h5>
-                    <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id" class="btn btn-primary">Lire plus</a>
-                </div>
+        
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@article.Title</h5>
+                <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id" class="btn btn-primary">Lire plus</a>
             </div>
-        }  
+        </div>
+        
     }
 </div>

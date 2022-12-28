@@ -1,41 +1,46 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using MyBlog.Mocks;
 using MyBlog.Models;
 using MyBlog.Repository.Context;
+using MyBlog.Repository.DAL;
 using MyBlog.ViewModels;
 
 namespace MyBlog.Controllers
 {
     public class ArticlesController : Controller
     {
-        private readonly DbBlogContext _dbBlogContext;
-        public ArticlesController(DbBlogContext dbBlogContext)
+      
+        private readonly ArticlesPublicDAL _articlesPublicRepository;
+        public ArticlesController(ArticlesPublicDAL articlesPublicRepository)
         {
-            _dbBlogContext= dbBlogContext;
+            _articlesPublicRepository = articlesPublicRepository;
         }
         public async Task<IActionResult> Index()
         {
             
             var vm = new ArticlesViewModel
             {
-                Articles = await _dbBlogContext.Articles.ToListAsync()
+                Articles = await _articlesPublicRepository.GetAllArticle()
             };
 
             return View(vm);
         }
 
-        /// <summary>
-        /// Get the data from the mock to put them in a database
-        /// </summary>
-        /// <returns>redirect to the article list</returns>
-        public async Task<IActionResult> AddDataFromMock() 
+        public async Task<IActionResult> Details(int? id)
         {
-            var lstArticlesMock = ArticlesMock.listArticles;
-            _dbBlogContext.Articles.AddRange(lstArticlesMock);
-            await _dbBlogContext.SaveChangesAsync();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            return RedirectToAction("Index");
+            var articlesModel = await _articlesPublicRepository.GetArticle(id.Value);
+
+            if (articlesModel == null || !articlesModel.Available)
+            {
+                return NotFound();
+            }
+
+            return View(articlesModel);
         }
     }
 }

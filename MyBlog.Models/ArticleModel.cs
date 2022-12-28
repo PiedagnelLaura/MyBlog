@@ -2,7 +2,7 @@
 {
 
     //Une classe identique à ma table en bdd
-    public class ArticlesModel
+    public class ArticleModel
     {
         public int Id { get; set; }
         public string Title { get; set; }

@@ -15,6 +15,6 @@ namespace MyBlog.Repository.Context
         {
         }
 
-        public DbSet<ArticlesModel> Articles { get; set; }
+        public DbSet<ArticleModel> Articles { get; set; }
     }
 }
