@@ -7,7 +7,7 @@ using MyBlog.Repository.DAL;
 using Microsoft.AspNetCore.Identity;
 using MyBlog.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using MyBlog.Services;
+using MyBlog.Repository.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
