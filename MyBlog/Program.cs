@@ -9,13 +9,12 @@ using MyBlog.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 //Add Entity Framework 
 builder.Services.AddDbContext<DbBlogContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("BlogDbContext")));
 
 builder.Services.AddDefaultIdentity<MyBlogUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<DbBlogContext>();
 
 builder.Services.AddTransient<ArticlesPublicDAL>();
