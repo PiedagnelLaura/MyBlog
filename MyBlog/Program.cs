@@ -6,6 +6,8 @@ using MyBlog.Data;
 using MyBlog.Repository.DAL;
 using Microsoft.AspNetCore.Identity;
 using MyBlog.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using MyBlog.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +34,8 @@ if (builder.Environment.IsDevelopment())
     mvcBuilder.AddRazorRuntimeCompilation();
 }
 
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
 var app = builder.Build();
 
