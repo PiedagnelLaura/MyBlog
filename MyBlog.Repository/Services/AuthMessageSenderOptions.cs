@@ -1,4 +1,4 @@
-﻿namespace MyBlog.Services
+﻿namespace MyBlog.Repository.Services
 {
     public class AuthMessageSenderOptions
     {
